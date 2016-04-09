@@ -68,10 +68,10 @@ public class TVAlertController : UIViewController {
     public private(set) var preferredStyle: UIAlertControllerStyle = .Alert
     
     // Customizations
-    var autoDismiss:Bool = true
-    var manageKeyboard:Bool = true
-    var autosortActions:Bool = true
-    var buttonShadows:Bool = true
+    public var autoDismiss:Bool = true
+    public var manageKeyboard:Bool = true
+    public var autosortActions:Bool = true
+    public var buttonShadows:Bool = true
     
     public convenience init(title: String?, message: String?, preferredStyle: UIAlertControllerStyle) {
         self.init()
