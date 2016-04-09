@@ -68,6 +68,7 @@ public class TVAlertController : UIViewController {
     public private(set) var preferredStyle: UIAlertControllerStyle = .Alert
     
     // Customizations
+    var autoDismiss:Bool = true
     var manageKeyboard:Bool = true
     var autosortActions:Bool = true
     var buttonShadows:Bool = true
@@ -107,11 +108,6 @@ public class TVAlertController : UIViewController {
         super.viewWillDisappear(animated)
     }
     
-    //MARK: Actions
-    @objc private func dismiss() {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     //MARK: Elements
     public func addAction(action: TVAlertAction) {
         action.delegate = self
@@ -147,7 +143,9 @@ extension TVAlertController {
     @objc private func didTapButton(sender:UIButton) {
         let a = self.actions[sender.tag]
         a.handler?(a)
-        self.dismiss()
+        if self.autoDismiss {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
     private func closeKeyboard() {
