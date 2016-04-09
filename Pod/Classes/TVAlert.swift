@@ -94,13 +94,12 @@ public class TVAlertController : UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         self.setupBlurView()
-        setupObservers()
     }
     
     public override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.setupContentView()
-        //        self.setupObservers()
+        self.setupObservers()
     }
     
     public override func viewWillDisappear(animated: Bool) {
