@@ -128,7 +128,7 @@ public class TVAlertController : UIViewController {
             self.textFields = []
         }
         
-        let t = TVTextField()
+        let t = TVATextField()
         self.textFields! += [t]
         configureTextField(t)
         if let c = configurationHandler {
@@ -243,9 +243,7 @@ private extension TVAlertController {
             for b in self.buttons {
                 b.layoutSubviews()
             }
-            
         }
-        
     }
     
     private func sortButtons() {
@@ -275,7 +273,7 @@ private extension TVAlertController {
         }
         
         if let t = self.title {
-            let titleView = TVLabel()
+            let titleView = TVALabel()
             titleView.text = t
             titleView.font = UIFont.boldSystemFontOfSize(18)
             configureLabel(titleView)
@@ -283,7 +281,7 @@ private extension TVAlertController {
         }
         
         if let m = self.message {
-            let messageView = TVLabel()
+            let messageView = TVALabel()
             messageView.text = m
             messageView.font = UIFont.systemFontOfSize(16)
             configureLabel(messageView)
@@ -305,7 +303,7 @@ private extension TVAlertController {
     
     private func setupButtons(inout views:[UIView]) {
         
-        func configureButton(button:TVButton, action:TVAlertAction) {
+        func configureButton(button:TVAButton, action:TVAlertAction) {
             button.setTitle(action.title, forState: .Normal)
             button.enabled = action.enabled
             button.translatesAutoresizingMaskIntoConstraints = false
@@ -341,7 +339,7 @@ private extension TVAlertController {
         let count = self.actions.count
         
         for (i, action) in self.actions.enumerate() {
-            let button = TVButton(type: .Custom)
+            let button = TVAButton(type: .Custom)
             self.buttons += [button]
             button.tag = i
             configureButton(button, action: action)
@@ -572,7 +570,7 @@ private extension UIImage {
 }
 
 // MARK:- TVButton
-private class TVButton:UIButton {
+private class TVAButton:UIButton {
     
     var shadows:Bool = true
     private var backgroundColorStates:[String:UIColor] = [:]
@@ -613,10 +611,10 @@ private class TVButton:UIButton {
     
     private func commonInit() {
         
-        self.addTarget(self, action: #selector(TVButton.grow), forControlEvents: .TouchDown)
-        self.addTarget(self, action: #selector(TVButton.grow), forControlEvents: .TouchDragEnter)
-        self.addTarget(self, action: #selector(TVButton.normal), forControlEvents: .TouchDragExit)
-        self.addTarget(self, action: #selector(TVButton.normal), forControlEvents: .TouchUpInside)
+        self.addTarget(self, action: #selector(TVAButton.grow), forControlEvents: .TouchDown)
+        self.addTarget(self, action: #selector(TVAButton.grow), forControlEvents: .TouchDragEnter)
+        self.addTarget(self, action: #selector(TVAButton.normal), forControlEvents: .TouchDragExit)
+        self.addTarget(self, action: #selector(TVAButton.normal), forControlEvents: .TouchUpInside)
     }
     
     @objc private func grow() {
@@ -648,7 +646,7 @@ private class TVButton:UIButton {
 }
 
 // MARK:- TVTextField
-private class TVTextField: UITextField {
+private class TVATextField: UITextField {
     let inset: CGFloat = 10
     
     // placeholder position
@@ -667,7 +665,7 @@ private class TVTextField: UITextField {
 }
 
 // MARK:- TVLabel
-private class TVLabel: UILabel {
+private class TVALabel: UILabel {
     
     private override func layoutSubviews() {
         super.layoutSubviews()
