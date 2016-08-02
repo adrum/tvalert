@@ -5,7 +5,6 @@
 //  Copyright (c) 2016 adrum. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 private protocol TVAlertActionDelegate {
@@ -38,6 +37,8 @@ public class TVAlertController : UIViewController {
     private var contentView:UIView?
     private var firstButtonTouched:UIButton?
     private var horizontalInset:CGFloat = 50
+    private var blurEffectView:UIVisualEffectView?
+    public var hasShown:Bool = false
     
     // Colors
     private var buttonBackgroundColor: UIColor {
@@ -80,9 +81,9 @@ public class TVAlertController : UIViewController {
         self.message = message
         self.preferredStyle = preferredStyle
         
-        self.takeScreenshot()
         self.modalPresentationStyle = .OverCurrentContext;
         self.modalTransitionStyle = .CrossDissolve
+        self.view.backgroundColor = UIColor.clearColor()
     }
     
     //MARK: View setup
@@ -95,12 +96,24 @@ public class TVAlertController : UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         self.setupBlurView()
+        self.blurEffectView?.effect = nil
     }
     
     public override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.setupContentView()
         self.setupObservers()
+
+        if self.hasShown == false {
+            self.hasShown = true
+            self.view.alpha = 0
+            UIView.animateWithDuration(0.33, animations: {
+                self.blurEffectView?.effect = UIBlurEffect(style: self.style)
+                self.view.alpha = 1
+            }) { (completed) in
+
+            }
+        }
     }
     
     public override func viewWillDisappear(animated: Bool) {
@@ -142,9 +155,17 @@ extension TVAlertController {
     
     @objc private func didTapButton(sender:UIButton) {
         let a = self.actions[sender.tag]
-        a.handler?(a)
         if self.autoDismiss {
-            self.dismissViewControllerAnimated(true, completion: nil)
+            UIView.animateWithDuration(0.5, animations: {
+                self.blurEffectView?.effect = nil
+                self.view.alpha = 0
+            }) { (completed) in
+                self.dismissViewControllerAnimated(false) {
+                    a.handler?(a)
+                }
+            }
+        } else {
+            a.handler?(a)
         }
     }
     
@@ -440,26 +461,15 @@ extension TVAlertController: TVAlertActionDelegate {
 // MARK: - Blur view
 private extension TVAlertController {
     private func setupBlurView() {
-        let imageView = UIImageView(frame: self.view.bounds)
-        imageView.image = self.backgroundImage
-        imageView.contentMode = .ScaleAspectFill
-        imageView.contentMode = .ScaleToFill
-        self.view.addSubview(imageView)
         
         let blurEffect = UIBlurEffect(style: self.style)
         let blurredEffectView = UIVisualEffectView(effect: blurEffect)
-        blurredEffectView.frame = imageView.bounds
+        blurredEffectView.frame = self.view.bounds
         view.addSubview(blurredEffectView)
-    }
-    
-    private func takeScreenshot() {
-        let screen = UIScreen.mainScreen()
-        let snapshotView = screen.snapshotViewAfterScreenUpdates(true)
-        UIGraphicsBeginImageContextWithOptions(snapshotView.bounds.size, true, 0)
-        snapshotView.drawViewHierarchyInRect(snapshotView.bounds, afterScreenUpdates: true)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        self.backgroundImage = image
+        self.blurEffectView = blurredEffectView
+        blurredEffectView.constrainToSuperviewEdges()
+
+        view.constrainToSuperviewEdges()
     }
 }
 
