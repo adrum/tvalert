@@ -43,7 +43,7 @@ pod "TVAlert"
 
 ## Author
 
-Austin Drummond, adrummond7@gmail.com
+Austin Drummond, adrum0x7@gmail.com
 
 ## License
 
