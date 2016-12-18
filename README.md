@@ -5,9 +5,13 @@
 [![License](https://img.shields.io/cocoapods/l/TVAlert.svg?style=flat)](http://cocoapods.org/pods/TVAlert)
 [![Platform](https://img.shields.io/cocoapods/p/TVAlert.svg?style=flat)](http://cocoapods.org/pods/TVAlert)
 
+
+![preview](preview.gif)
+
+
 ## Usage
 
-TVAlert's usage is the same as `UIAlertController`. Just replace `UI` with `TV` on both `UIAlertController` and `UIAlertAction` 
+TVAlert's usage is the same as `UIAlertController`. Just replace `UI` with `TV` on both `UIAlertController` and `UIAlertAction`
 
 ```swift
 let alertController = TVAlertController(title: "Title", message: "Message", preferredStyle: .alert)
