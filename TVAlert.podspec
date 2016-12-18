@@ -15,11 +15,11 @@ Pod::Spec.new do |s|
                        A UIAlertController style library that mimics tvOS alerts.
                         DESC
 
-  s.homepage         = "https://github.com/adrum/TVAlert"
+  s.homepage         = "https://github.com/adrum/tvalert"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
   s.author           = { "Austin Drummond" => "adrummond7@gmail.com" }
-  s.source           = { :git => "https://github.com/adrum/TVAlert.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/adrum/tvalert.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/adrummond7'
 
   s.platform     = :ios, '8.0'
