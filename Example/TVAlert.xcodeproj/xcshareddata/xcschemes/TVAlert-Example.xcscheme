@@ -52,6 +52,16 @@
                ReferencedContainer = "container:TVAlert.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D91D5CC51E0643750013E910"
+               BuildableName = "TVAlert_UITests.xctest"
+               BlueprintName = "TVAlert_UITests"
+               ReferencedContainer = "container:TVAlert.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

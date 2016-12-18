@@ -7,30 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		12CF74B4FBE3196A8B03B3F9 /* Pods_TVAlert_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 979ADDC0B138BA5B4C1D5E5F /* Pods_TVAlert_Tests.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		A3D76554548BCC874C7355CE /* Pods_TVAlert_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AF5C83C55E2537C7F430D7E /* Pods_TVAlert_Example.framework */; };
+		D91D5CC91E0643750013E910 /* TVAlert_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91D5CC81E0643750013E910 /* TVAlert_UITests.swift */; };
+		D91D5CD11E06461E0013E910 /* .travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = D91D5CD01E06461E0013E910 /* .travis.yml */; };
 		D9DC85401E06214D0036B775 /* .swift-version in Resources */ = {isa = PBXBuildFile; fileRef = D9DC853F1E06214D0036B775 /* .swift-version */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		607FACE61AFB9204008FA782 /* PBXContainerItemProxy */ = {
+		D91D5CCB1E0643750013E910 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 607FACCF1AFB9204008FA782;
-			remoteInfo = TVAlert;
+			remoteInfo = TVAlert_Example;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		09679349AC43FCA0CD54D31D /* Pods-TVAlert_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVAlert_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-TVAlert_Example/Pods-TVAlert_Example.release.xcconfig"; sourceTree = "<group>"; };
-		0A858E4FE64870755905D7B8 /* TVAlert.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = TVAlert.podspec; path = ../TVAlert.podspec; sourceTree = "<group>"; };
+		0A858E4FE64870755905D7B8 /* TVAlert.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = TVAlert.podspec; path = ../TVAlert.podspec; sourceTree = "<group>"; };
 		1AB6714F48CE47055EC27CCC /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		2AF5C83C55E2537C7F430D7E /* Pods_TVAlert_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TVAlert_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* TVAlert_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVAlert_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -40,14 +40,15 @@
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		607FACE51AFB9204008FA782 /* TVAlert_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TVAlert_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		67508C2E27DA425C300E7762 /* Pods-TVAlert_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVAlert_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TVAlert_Tests/Pods-TVAlert_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		7FFA7C391B0042907653B2A2 /* Pods-TVAlert_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVAlert_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TVAlert_Example/Pods-TVAlert_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		979ADDC0B138BA5B4C1D5E5F /* Pods_TVAlert_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TVAlert_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C63851DE23791BF71486D3E9 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		CA171AB2A919E7EF0F06A071 /* Pods-TVAlert_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TVAlert_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TVAlert_Tests/Pods-TVAlert_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		D91D5CC61E0643750013E910 /* TVAlert_UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TVAlert_UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D91D5CC81E0643750013E910 /* TVAlert_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVAlert_UITests.swift; sourceTree = "<group>"; };
+		D91D5CCA1E0643750013E910 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D91D5CD01E06461E0013E910 /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .travis.yml; path = ../.travis.yml; sourceTree = "<group>"; };
 		D9DC853F1E06214D0036B775 /* .swift-version */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ".swift-version"; path = "../.swift-version"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,11 +61,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		607FACE21AFB9204008FA782 /* Frameworks */ = {
+		D91D5CC31E0643750013E910 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12CF74B4FBE3196A8B03B3F9 /* Pods_TVAlert_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,7 +76,7 @@
 			children = (
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for TVAlert */,
-				607FACE81AFB9204008FA782 /* Tests */,
+				D91D5CC71E0643750013E910 /* TVAlert_UITests */,
 				607FACD11AFB9204008FA782 /* Products */,
 				DEA556784C77BF4BDE314DDC /* Pods */,
 				D10089E447F33DAA5F224F8C /* Frameworks */,
@@ -87,7 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				607FACD01AFB9204008FA782 /* TVAlert_Example.app */,
-				607FACE51AFB9204008FA782 /* TVAlert_Tests.xctest */,
+				D91D5CC61E0643750013E910 /* TVAlert_UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -114,27 +114,11 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		607FACE81AFB9204008FA782 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				607FACEB1AFB9204008FA782 /* Tests.swift */,
-				607FACE91AFB9204008FA782 /* Supporting Files */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
-		607FACE91AFB9204008FA782 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				607FACEA1AFB9204008FA782 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
 				D9DC853F1E06214D0036B775 /* .swift-version */,
+				D91D5CD01E06461E0013E910 /* .travis.yml */,
 				0A858E4FE64870755905D7B8 /* TVAlert.podspec */,
 				1AB6714F48CE47055EC27CCC /* README.md */,
 				C63851DE23791BF71486D3E9 /* LICENSE */,
@@ -149,6 +133,16 @@
 				979ADDC0B138BA5B4C1D5E5F /* Pods_TVAlert_Tests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D91D5CC71E0643750013E910 /* TVAlert_UITests */ = {
+			isa = PBXGroup;
+			children = (
+				D91D5CC81E0643750013E910 /* TVAlert_UITests.swift */,
+				D91D5CCA1E0643750013E910 /* Info.plist */,
+			);
+			name = TVAlert_UITests;
+			path = TVAlert_ExampleUITests;
 			sourceTree = "<group>";
 		};
 		DEA556784C77BF4BDE314DDC /* Pods */ = {
@@ -185,26 +179,23 @@
 			productReference = 607FACD01AFB9204008FA782 /* TVAlert_Example.app */;
 			productType = "com.apple.product-type.application";
 		};
-		607FACE41AFB9204008FA782 /* TVAlert_Tests */ = {
+		D91D5CC51E0643750013E910 /* TVAlert_UITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "TVAlert_Tests" */;
+			buildConfigurationList = D91D5CCF1E0643750013E910 /* Build configuration list for PBXNativeTarget "TVAlert_UITests" */;
 			buildPhases = (
-				CFC1D48D6860E25A1C9D71BE /* [CP] Check Pods Manifest.lock */,
-				607FACE11AFB9204008FA782 /* Sources */,
-				607FACE21AFB9204008FA782 /* Frameworks */,
-				607FACE31AFB9204008FA782 /* Resources */,
-				90EC611533E16F35E0B785C0 /* [CP] Embed Pods Frameworks */,
-				4CB9FD6FE53AB9C4467BED4D /* [CP] Copy Pods Resources */,
+				D91D5CC21E0643750013E910 /* Sources */,
+				D91D5CC31E0643750013E910 /* Frameworks */,
+				D91D5CC41E0643750013E910 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				607FACE71AFB9204008FA782 /* PBXTargetDependency */,
+				D91D5CCC1E0643750013E910 /* PBXTargetDependency */,
 			);
-			name = TVAlert_Tests;
-			productName = Tests;
-			productReference = 607FACE51AFB9204008FA782 /* TVAlert_Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
+			name = TVAlert_UITests;
+			productName = TVAlert_ExampleUITests;
+			productReference = D91D5CC61E0643750013E910 /* TVAlert_UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -212,7 +203,7 @@
 		607FACC81AFB9204008FA782 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0810;
 				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
@@ -220,9 +211,9 @@
 						CreatedOnToolsVersion = 6.3.1;
 						LastSwiftMigration = 0810;
 					};
-					607FACE41AFB9204008FA782 = {
-						CreatedOnToolsVersion = 6.3.1;
-						LastSwiftMigration = 0810;
+					D91D5CC51E0643750013E910 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
 				};
@@ -241,7 +232,7 @@
 			projectRoot = "";
 			targets = (
 				607FACCF1AFB9204008FA782 /* TVAlert_Example */,
-				607FACE41AFB9204008FA782 /* TVAlert_Tests */,
+				D91D5CC51E0643750013E910 /* TVAlert_UITests */,
 			);
 		};
 /* End PBXProject section */
@@ -251,6 +242,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D91D5CD11E06461E0013E910 /* .travis.yml in Resources */,
 				D9DC85401E06214D0036B775 /* .swift-version in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
@@ -258,7 +250,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		607FACE31AFB9204008FA782 /* Resources */ = {
+		D91D5CC41E0643750013E910 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -283,52 +275,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TVAlert_Example/Pods-TVAlert_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4CB9FD6FE53AB9C4467BED4D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TVAlert_Tests/Pods-TVAlert_Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		90EC611533E16F35E0B785C0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TVAlert_Tests/Pods-TVAlert_Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		C023723EA4A3444730021C74 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		CFC1D48D6860E25A1C9D71BE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -370,21 +317,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		607FACE11AFB9204008FA782 /* Sources */ = {
+		D91D5CC21E0643750013E910 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+				D91D5CC91E0643750013E910 /* TVAlert_UITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		607FACE71AFB9204008FA782 /* PBXTargetDependency */ = {
+		D91D5CCC1E0643750013E910 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 607FACCF1AFB9204008FA782 /* TVAlert_Example */;
-			targetProxy = 607FACE61AFB9204008FA782 /* PBXContainerItemProxy */;
+			targetProxy = D91D5CCB1E0643750013E910 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -504,7 +451,7 @@
 				INFOPLIST_FILE = TVAlert/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.austindrummond.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -520,48 +467,44 @@
 				INFOPLIST_FILE = TVAlert/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.austindrummond.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
-		607FACF31AFB9204008FA782 /* Debug */ = {
+		D91D5CCD1E0643750013E910 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CA171AB2A919E7EF0F06A071 /* Pods-TVAlert_Tests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = Tests/Info.plist;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = TVAlert_ExampleUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.austindrummond.TVAlert-ExampleUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = TVAlert_Example;
 			};
 			name = Debug;
 		};
-		607FACF41AFB9204008FA782 /* Release */ = {
+		D91D5CCE1E0643750013E910 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 67508C2E27DA425C300E7762 /* Pods-TVAlert_Tests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = Tests/Info.plist;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				INFOPLIST_FILE = TVAlert_ExampleUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.austindrummond.TVAlert-ExampleUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = TVAlert_Example;
 			};
 			name = Release;
 		};
@@ -586,14 +529,13 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "TVAlert_Tests" */ = {
+		D91D5CCF1E0643750013E910 /* Build configuration list for PBXNativeTarget "TVAlert_UITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				607FACF31AFB9204008FA782 /* Debug */,
-				607FACF41AFB9204008FA782 /* Release */,
+				D91D5CCD1E0643750013E910 /* Debug */,
+				D91D5CCE1E0643750013E910 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
