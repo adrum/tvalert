@@ -38,6 +38,7 @@ open class TVAlertController : UIViewController {
     fileprivate var firstButtonTouched:UIButton?
     fileprivate var horizontalInset:CGFloat = 50
     fileprivate var blurEffectView:UIVisualEffectView?
+    fileprivate var backdropView:UIView?
     open var hasShown:Bool = false
     
     // Colors
@@ -103,16 +104,32 @@ open class TVAlertController : UIViewController {
         super.viewWillAppear(animated)
         self.setupContentView()
         self.setupObservers()
-
+        
+        // Show animations
         if self.hasShown == false {
             self.hasShown = true
+            
             self.view.alpha = 0
-            UIView.animate(withDuration: 0.33, animations: {
-                self.blurEffectView?.effect = UIBlurEffect(style: self.style)
+            self.contentView?.alpha = 0
+            
+            self.animate(duration: 0.08, animations: {
+                
                 self.view.alpha = 1
+                
             }, completion: { (completed) in
-
-            }) 
+                
+                self.animate(duration: 0.45, curve: .easeOut, animations: {
+                    self.blurEffectView?.effect = UIBlurEffect(style: self.style)
+                    self.backdropView?.alpha = 0
+                })
+                
+            })
+            
+            self.animate(duration: 0.7, curve: .easeOut, animations: {
+                
+                self.contentView?.alpha = 1
+                
+            })
         }
     }
     
@@ -172,9 +189,11 @@ extension TVAlertController {
     @objc fileprivate func didTapButton(_ sender:UIButton) {
         let a = self.actions[sender.tag]
         if self.autoDismiss {
-            UIView.animate(withDuration: 0.5, animations: {
+            
+            animate(duration: 0.33, animations: {
                 self.blurEffectView?.effect = nil
-                self.view.alpha = 0
+                self.blurEffectView?.alpha = 0
+                self.contentView?.alpha = 0
             }, completion: { (completed) in
                 self.dismiss(animated: false) {
                     a.handler?(a)
@@ -474,9 +493,15 @@ extension TVAlertController: TVAlertActionDelegate {
     }
 }
 
-// MARK: - Blur view
+// MARK: - Blur view + backdrop helper
 private extension TVAlertController {
     func setupBlurView() {
+        
+        self.setupBackdropView()
+        
+        if self.blurEffectView != nil {
+            return
+        }
         
         let blurEffect = UIBlurEffect(style: self.style)
         let blurredEffectView = UIVisualEffectView(effect: blurEffect)
@@ -486,6 +511,20 @@ private extension TVAlertController {
         blurredEffectView.constrainToSuperviewEdges()
 
         view.constrainToSuperviewEdges()
+    }
+    
+    func setupBackdropView() {
+        if #available(iOS 10, *) {
+            if self.backdropView != nil {
+                return
+            }
+            let backdropView = UIView(frame: self.view.bounds)
+            backdropView.backgroundColor = self.style == .dark ? UIColor.black : UIColor.white
+            backdropView.alpha = self.style == .dark ? 0.3 : 0.6
+            view.addSubview(backdropView)
+            view.constrainToSuperviewEdges()
+            self.backdropView = backdropView
+        }
     }
 }
 
@@ -713,5 +752,33 @@ private class TVALabel: UILabel {
         super.layoutSubviews()
         self.preferredMaxLayoutWidth = self.bounds.width
         super.layoutSubviews()
+    }
+}
+
+
+// MARK:- Animation Helper
+extension TVAlertController {
+    
+    fileprivate func animate(duration:TimeInterval, curve:UIViewAnimationCurve = .linear, animations:@escaping ()->Void, completion:((_:Bool)->Void)? = nil) {
+    
+    
+        if #available(iOS 10.0, *) {
+            let animator = UIViewPropertyAnimator(duration: duration, curve: curve, animations: animations)
+            animator.startAnimation()
+            
+            if let completion = completion {
+                animator.addCompletion({ (position) in
+                    completion(position == .end)
+                })
+            }
+            
+        } else {
+            
+            if let completion = completion {
+                UIView.animate(withDuration: duration, animations: animations, completion: completion)
+            } else {
+                UIView.animate(withDuration: duration, animations: animations)
+            }
+        }
     }
 }
