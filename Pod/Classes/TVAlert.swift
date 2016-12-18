@@ -559,24 +559,28 @@ private extension UIView {
         self.centerVerticallyInSuperview()
     }
     
-    private func centerHorizontallyInSuperview(){
+    private func centerHorizontallyInSuperview() {
+        self.translatesAutoresizingMaskIntoConstraints = false
         self.superview?.addConstraint(NSLayoutConstraint(item: self, attribute: .CenterX, relatedBy: .Equal, toItem: self.superview, attribute: .CenterX, multiplier: 1, constant: 0))
     }
     
-    private func centerVerticallyInSuperview(){
+    private func centerVerticallyInSuperview() {
+        self.translatesAutoresizingMaskIntoConstraints = false
         self.superview?.addConstraint(NSLayoutConstraint(item: self, attribute: .CenterY, relatedBy: .Equal, toItem: self.superview, attribute: .CenterY, multiplier: 1, constant: 0))
     }
     
-    private func constrainSizeTo(size:CGSize){
+    private func constrainSizeTo(size:CGSize) {
         self.constrainSizeToWidth(size.width)
         self.constrainSizeToHeight(size.height)
     }
     
-    private func constrainSizeToHeight(size:CGFloat){
+    private func constrainSizeToHeight(size:CGFloat) {
+        self.translatesAutoresizingMaskIntoConstraints = false
         self.addConstraint(NSLayoutConstraint(item: self, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: size))
     }
     
-    private func constrainSizeToWidth(size:CGFloat){
+    private func constrainSizeToWidth(size:CGFloat) {
+        self.translatesAutoresizingMaskIntoConstraints = false
         self.addConstraint(NSLayoutConstraint(item: self, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: size))
     }
     
