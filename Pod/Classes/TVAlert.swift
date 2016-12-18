@@ -148,6 +148,22 @@ public class TVAlertController : UIViewController {
             c(t)
         }
     }
+
+    //MARK: Rotation
+    override public func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+
+        if let mask = self.parentViewController?.supportedInterfaceOrientations() {
+            return mask
+        }
+        return .All
+    }
+
+    override public func shouldAutorotate() -> Bool {
+        if let rotate = self.parentViewController?.shouldAutorotate() {
+            return rotate
+        }
+        return true
+    }
 }
 
 // MARK: - Touch interactions
