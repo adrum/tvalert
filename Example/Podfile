@@ -6,7 +6,7 @@ target 'TVAlert_Example' do
 
 end
 
-target 'TVAlert_Tests' do
+target 'TVAlert_UITests' do
     use_frameworks!
     pod 'TVAlert', :path => '../'
 end
