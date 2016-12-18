@@ -15,9 +15,9 @@ open class TVAlertAction: NSObject {
     open fileprivate(set) var title:String?
     open fileprivate(set) var handler:((TVAlertAction)->Void)?
     open fileprivate(set) var style: UIAlertActionStyle = .default
-    open var enabled:Bool = true {
+    open var isEnabled:Bool = true {
         didSet {
-            self.delegate?.didChangeEnabled(self, enabled: self.enabled)
+            self.delegate?.didChangeEnabled(self, enabled: self.isEnabled)
         }
     }
     fileprivate var delegate:TVAlertActionDelegate?
@@ -144,7 +144,7 @@ open class TVAlertController : UIViewController {
         self.actions += [action]
     }
     
-    open func addTextFieldWithConfigurationHandler(_ configurationHandler: ((UITextField) -> Void)?) {
+    open func addTextField(_ configurationHandler: ((UITextField) -> Void)?) {
         
         func configureTextField(_ t:UITextField) {
             let color = UIColor.black.withAlphaComponent(0.75)
@@ -361,7 +361,7 @@ private extension TVAlertController {
         
         func configureButton(_ button:TVAButton, action:TVAlertAction) {
             button.setTitle(action.title, for: UIControlState())
-            button.isEnabled = action.enabled
+            button.isEnabled = action.isEnabled
             button.translatesAutoresizingMaskIntoConstraints = false
             button.isUserInteractionEnabled = false
             button.layer.cornerRadius = 5

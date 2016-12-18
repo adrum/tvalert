@@ -237,22 +237,22 @@ extension ViewController {
             let passwordTextField = alertController.textFields![1] as UITextField
             print("Login: \(loginTextField.text):\(passwordTextField.text)")
         }
-        loginAction.enabled = false
+        loginAction.isEnabled = false
         
         let forgotPasswordAction = TVAlertAction(title: "Forgot Password", style: .destructive) { (action) in
             print("Test")
         }
         let cancelAction = TVAlertAction(title: "Cancel", style: .cancel) { (_) in }
         
-        alertController.addTextFieldWithConfigurationHandler { (textField) in
+        alertController.addTextField { (textField) in
             textField.placeholder = "Login"
             
             NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange, object: textField, queue: OperationQueue.main, using: { (notification) in
-                  loginAction.enabled = textField.text != ""
+                  loginAction.isEnabled = textField.text != ""
             })
         }
         
-        alertController.addTextFieldWithConfigurationHandler { (textField) in
+        alertController.addTextField { (textField) in
             textField.placeholder = "Password"
             textField.isSecureTextEntry = true
         }
