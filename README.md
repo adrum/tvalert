@@ -1,6 +1,6 @@
 # TVAlert
 
-[![CI Status](http://img.shields.io/travis/Austin Drummond/TVAlert.svg?style=flat)](https://travis-ci.org/Austin Drummond/TVAlert)
+[![CI Status](https://img.shields.io/travis/adrum/tvalert.svg?style=flat)](https://img.shields.io/travis/adrum/tvalert)
 [![Version](https://img.shields.io/cocoapods/v/TVAlert.svg?style=flat)](http://cocoapods.org/pods/TVAlert)
 [![License](https://img.shields.io/cocoapods/l/TVAlert.svg?style=flat)](http://cocoapods.org/pods/TVAlert)
 [![Platform](https://img.shields.io/cocoapods/p/TVAlert.svg?style=flat)](http://cocoapods.org/pods/TVAlert)
