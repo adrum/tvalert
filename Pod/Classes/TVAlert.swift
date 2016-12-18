@@ -8,19 +8,19 @@
 import UIKit
 
 private protocol TVAlertActionDelegate {
-    func didChangeEnabled(action:TVAlertAction, enabled:Bool)
+    func didChangeEnabled(_ action:TVAlertAction, enabled:Bool)
 }
 
-public class TVAlertAction: NSObject {
-    public private(set) var title:String?
-    public private(set) var handler:((TVAlertAction)->Void)?
-    public private(set) var style: UIAlertActionStyle = .Default
-    public var enabled:Bool = true {
+open class TVAlertAction: NSObject {
+    open fileprivate(set) var title:String?
+    open fileprivate(set) var handler:((TVAlertAction)->Void)?
+    open fileprivate(set) var style: UIAlertActionStyle = .default
+    open var enabled:Bool = true {
         didSet {
             self.delegate?.didChangeEnabled(self, enabled: self.enabled)
         }
     }
-    private var delegate:TVAlertActionDelegate?
+    fileprivate var delegate:TVAlertActionDelegate?
     
     public convenience init(title: String?, style: UIAlertActionStyle, handler: ((TVAlertAction) -> Void)?) {
         self.init()
@@ -30,49 +30,49 @@ public class TVAlertAction: NSObject {
     }
 }
 
-public class TVAlertController : UIViewController {
+open class TVAlertController : UIViewController {
     
     // Private vars
-    private var backgroundImage:UIImage?
-    private var contentView:UIView?
-    private var firstButtonTouched:UIButton?
-    private var horizontalInset:CGFloat = 50
-    private var blurEffectView:UIVisualEffectView?
-    public var hasShown:Bool = false
+    fileprivate var backgroundImage:UIImage?
+    fileprivate var contentView:UIView?
+    fileprivate var firstButtonTouched:UIButton?
+    fileprivate var horizontalInset:CGFloat = 50
+    fileprivate var blurEffectView:UIVisualEffectView?
+    open var hasShown:Bool = false
     
     // Colors
-    private var buttonBackgroundColor: UIColor {
+    fileprivate var buttonBackgroundColor: UIColor {
         get {
-            return UIColor.blackColor().colorWithAlphaComponent(0.2)
+            return UIColor.black.withAlphaComponent(0.2)
         }
     }
-    private var buttonTextColor: UIColor {
+    fileprivate var buttonTextColor: UIColor {
         get {
-            return self.style == .Dark ? UIColor.whiteColor() : UIColor.blackColor().colorWithAlphaComponent(0.8)
+            return self.style == .dark ? UIColor.white : UIColor.black.withAlphaComponent(0.8)
         }
     }
     
-    private var buttonHighlightedTextColor: UIColor {
+    fileprivate var buttonHighlightedTextColor: UIColor {
         get {
-            return self.style == .Dark ? UIColor.blackColor().colorWithAlphaComponent(0.8) : UIColor.whiteColor()
+            return self.style == .dark ? UIColor.black.withAlphaComponent(0.8) : UIColor.white
         }
     }
     
     // Alert vars
-    public var message: String?
-    public private(set) var actions: [TVAlertAction] = []
-    public private(set) var textFields: [UITextField]?
-    private var buttons: [UIButton] = []
-    public var style: UIBlurEffectStyle = .Dark
+    open var message: String?
+    open fileprivate(set) var actions: [TVAlertAction] = []
+    open fileprivate(set) var textFields: [UITextField]?
+    fileprivate var buttons: [UIButton] = []
+    open var style: UIBlurEffectStyle = .dark
     
-    public var preferredAction: TVAlertAction?
-    public private(set) var preferredStyle: UIAlertControllerStyle = .Alert
+    open var preferredAction: TVAlertAction?
+    open fileprivate(set) var preferredStyle: UIAlertControllerStyle = .alert
     
     // Customizations
-    public var autoDismiss:Bool = true
-    public var manageKeyboard:Bool = true
-    public var autosortActions:Bool = true
-    public var buttonShadows:Bool = true
+    open var autoDismiss:Bool = true
+    open var manageKeyboard:Bool = true
+    open var autosortActions:Bool = true
+    open var buttonShadows:Bool = true
     
     public convenience init(title: String?, message: String?, preferredStyle: UIAlertControllerStyle) {
         self.init()
@@ -81,25 +81,25 @@ public class TVAlertController : UIViewController {
         self.message = message
         self.preferredStyle = preferredStyle
         
-        self.modalPresentationStyle = .OverCurrentContext;
-        self.modalTransitionStyle = .CrossDissolve
-        self.view.backgroundColor = UIColor.clearColor()
+        self.modalPresentationStyle = .overCurrentContext;
+        self.modalTransitionStyle = .crossDissolve
+        self.view.backgroundColor = UIColor.clear
     }
     
     //MARK: View setup
-    public override func loadView() {
-        if let window = UIApplication.sharedApplication().keyWindow {
+    open override func loadView() {
+        if let window = UIApplication.shared.keyWindow {
             self.view = UIView(frame: window.bounds)
         }
     }
     
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         self.setupBlurView()
         self.blurEffectView?.effect = nil
     }
     
-    public override func viewWillAppear(animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.setupContentView()
         self.setupObservers()
@@ -107,31 +107,31 @@ public class TVAlertController : UIViewController {
         if self.hasShown == false {
             self.hasShown = true
             self.view.alpha = 0
-            UIView.animateWithDuration(0.33, animations: {
+            UIView.animate(withDuration: 0.33, animations: {
                 self.blurEffectView?.effect = UIBlurEffect(style: self.style)
                 self.view.alpha = 1
-            }) { (completed) in
+            }, completion: { (completed) in
 
-            }
+            }) 
         }
     }
     
-    public override func viewWillDisappear(animated: Bool) {
+    open override func viewWillDisappear(_ animated: Bool) {
         self.removeObservers()
         super.viewWillDisappear(animated)
     }
     
     //MARK: Elements
-    public func addAction(action: TVAlertAction) {
+    open func addAction(_ action: TVAlertAction) {
         action.delegate = self
         self.actions += [action]
     }
     
-    public func addTextFieldWithConfigurationHandler(configurationHandler: ((UITextField) -> Void)?) {
+    open func addTextFieldWithConfigurationHandler(_ configurationHandler: ((UITextField) -> Void)?) {
         
-        func configureTextField(t:UITextField) {
-            let color = UIColor.blackColor().colorWithAlphaComponent(0.75)
-            t.backgroundColor = self.style == .Dark ? UIColor.whiteColor().colorWithAlphaComponent(0.75) :UIColor.blackColor().colorWithAlphaComponent(0.09)
+        func configureTextField(_ t:UITextField) {
+            let color = UIColor.black.withAlphaComponent(0.75)
+            t.backgroundColor = self.style == .dark ? UIColor.white.withAlphaComponent(0.75) :UIColor.black.withAlphaComponent(0.09)
             t.textColor = color
             t.tintColor = color
             t.layer.cornerRadius = 5
@@ -150,16 +150,16 @@ public class TVAlertController : UIViewController {
     }
 
     //MARK: Rotation
-    override public func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+    override open var supportedInterfaceOrientations : UIInterfaceOrientationMask {
 
-        if let mask = self.parentViewController?.supportedInterfaceOrientations() {
+        if let mask = self.parent?.supportedInterfaceOrientations {
             return mask
         }
-        return .All
+        return .all
     }
 
-    override public func shouldAutorotate() -> Bool {
-        if let rotate = self.parentViewController?.shouldAutorotate() {
+    override open var shouldAutorotate : Bool {
+        if let rotate = self.parent?.shouldAutorotate {
             return rotate
         }
         return true
@@ -169,71 +169,71 @@ public class TVAlertController : UIViewController {
 // MARK: - Touch interactions
 extension TVAlertController {
     
-    @objc private func didTapButton(sender:UIButton) {
+    @objc fileprivate func didTapButton(_ sender:UIButton) {
         let a = self.actions[sender.tag]
         if self.autoDismiss {
-            UIView.animateWithDuration(0.5, animations: {
+            UIView.animate(withDuration: 0.5, animations: {
                 self.blurEffectView?.effect = nil
                 self.view.alpha = 0
-            }) { (completed) in
-                self.dismissViewControllerAnimated(false) {
+            }, completion: { (completed) in
+                self.dismiss(animated: false) {
                     a.handler?(a)
                 }
-            }
+            }) 
         } else {
             a.handler?(a)
         }
     }
     
-    private func closeKeyboard() {
+    fileprivate func closeKeyboard() {
         self.view.endEditing(true)
     }
     
-    public override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.firstButtonTouched = nil
         self.processButtonStates(touches, withEvent: event) { b, inside in
             if inside {
                 self.firstButtonTouched = b
-                if b.enabled {
-                    b.sendActionsForControlEvents(.TouchDown)
+                if b.isEnabled {
+                    b.sendActions(for: .touchDown)
                 }
             }
         }
     }
     
-    public override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.processButtonStates(touches, withEvent: event) { b, inside in
-            if b.enabled == false || self.firstButtonTouched == nil {
-                b.highlighted = false
+            if b.isEnabled == false || self.firstButtonTouched == nil {
+                b.isHighlighted = false
                 return
             }
             if inside {
-                b.sendActionsForControlEvents(.TouchDragEnter)
+                b.sendActions(for: .touchDragEnter)
             } else {
-                b.sendActionsForControlEvents(.TouchDragExit)
+                b.sendActions(for: .touchDragExit)
             }
         }
     }
     
-    public override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.processButtonStates(touches, withEvent: event) { b, inside in
-            b.highlighted = false
-            if inside && b.enabled && self.firstButtonTouched != nil {
+            b.isHighlighted = false
+            if inside && b.isEnabled && self.firstButtonTouched != nil {
                 
-                b.sendActionsForControlEvents(.TouchUpInside)
+                b.sendActions(for: .touchUpInside)
             }
             self.closeKeyboard()
         }
     }
     
-    private func processButtonStates(touches: Set<UITouch>, withEvent event: UIEvent?, eventHandler:((UIButton, Bool)->Void)? = nil) {
+    fileprivate func processButtonStates(_ touches: Set<UITouch>, withEvent event: UIEvent?, eventHandler:((UIButton, Bool)->Void)? = nil) {
         for t in touches {
-            let point = t.locationInView(self.contentView)
+            let point = t.location(in: self.contentView)
             
             for b in self.buttons {
-                if let testPoint = self.contentView?.convertPoint(point, toView: b) {
-                    let inside = b.pointInside(testPoint, withEvent:event)
-                    b.highlighted = inside
+                if let testPoint = self.contentView?.convert(point, to: b) {
+                    let inside = b.point(inside: testPoint, with:event)
+                    b.isHighlighted = inside
                     eventHandler?(b, inside)
                 }
             }
@@ -244,7 +244,7 @@ extension TVAlertController {
 // MARK: - Setup
 private extension TVAlertController {
     
-    private func setupContentView() {
+    func setupContentView() {
         
         if self.contentView == nil {
             
@@ -253,8 +253,8 @@ private extension TVAlertController {
             self.view.addSubview(contentView)
             
             contentView.translatesAutoresizingMaskIntoConstraints = false
-            contentView.setContentHuggingPriority(UILayoutPriorityRequired, forAxis: .Vertical)
-            contentView.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Vertical)
+            contentView.setContentHuggingPriority(UILayoutPriorityRequired, for: .vertical)
+            contentView.setContentCompressionResistancePriority(UILayoutPriorityRequired, for: .vertical)
             
             // Vertical Constraints
             self.contentView = contentView
@@ -283,36 +283,36 @@ private extension TVAlertController {
         }
     }
     
-    private func sortButtons() {
+    func sortButtons() {
         
         if self.autosortActions == false {
             return
         }
         
-        let normal = self.actions.filter({$0.style != .Cancel})
-        let cancel = self.actions.filter({$0.style == .Cancel})
+        let normal = self.actions.filter({$0.style != .cancel})
+        let cancel = self.actions.filter({$0.style == .cancel})
         var actions = normal
-        actions.appendContentsOf(cancel)
+        actions.append(contentsOf: cancel)
         if self.actions.count == 2 {
             actions = cancel
-            actions.appendContentsOf(normal)
+            actions.append(contentsOf: normal)
         }
         self.actions = actions
     }
     
-    private func setupLabels(inout views:[UIView]) {
+    func setupLabels(_ views:inout [UIView]) {
         
-        func configureLabel(label:UILabel) {
-            label.textAlignment = .Center
+        func configureLabel(_ label:UILabel) {
+            label.textAlignment = .center
             label.numberOfLines = 0
-            label.lineBreakMode = NSLineBreakMode.ByWordWrapping
+            label.lineBreakMode = NSLineBreakMode.byWordWrapping
             label.textColor = self.buttonTextColor
         }
         
         if let t = self.title {
             let titleView = TVALabel()
             titleView.text = t
-            titleView.font = UIFont.boldSystemFontOfSize(18)
+            titleView.font = UIFont.boldSystemFont(ofSize: 18)
             configureLabel(titleView)
             views += [titleView]
         }
@@ -320,63 +320,63 @@ private extension TVAlertController {
         if let m = self.message {
             let messageView = TVALabel()
             messageView.text = m
-            messageView.font = UIFont.systemFontOfSize(16)
+            messageView.font = UIFont.systemFont(ofSize: 16)
             configureLabel(messageView)
             views += [messageView]
         }
         
     }
     
-    private func setupTextFields(inout views:[UIView]) {
+    func setupTextFields(_ views:inout [UIView]) {
         
         guard let textFields = self.textFields else {
             return
         }
         
-        for (_, textfield) in textFields.enumerate() {
+        for (_, textfield) in textFields.enumerated() {
             views += [textfield]
         }
     }
     
-    private func setupButtons(inout views:[UIView]) {
+    func setupButtons(_ views:inout [UIView]) {
         
-        func configureButton(button:TVAButton, action:TVAlertAction) {
-            button.setTitle(action.title, forState: .Normal)
-            button.enabled = action.enabled
+        func configureButton(_ button:TVAButton, action:TVAlertAction) {
+            button.setTitle(action.title, for: UIControlState())
+            button.isEnabled = action.enabled
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.userInteractionEnabled = false
+            button.isUserInteractionEnabled = false
             button.layer.cornerRadius = 5
             button.shadows = self.buttonShadows
-            button.addTarget(self, action: #selector(TVAlertController.didTapButton(_:)), forControlEvents: .TouchUpInside)
+            button.addTarget(self, action: #selector(TVAlertController.didTapButton(_:)), for: .touchUpInside)
             var buttonTextColor = self.buttonTextColor
             switch action.style {
-            case .Default:
+            case .default:
                 break
-            case .Cancel:
+            case .cancel:
                 if self.preferredAction == nil {
-                    button.titleLabel?.font = UIFont.boldSystemFontOfSize(button.titleLabel!.font.pointSize)
+                    button.titleLabel?.font = UIFont.boldSystemFont(ofSize: button.titleLabel!.font.pointSize)
                 }
                 break
-            case .Destructive:
-                buttonTextColor = UIColor.redColor()
+            case .destructive:
+                buttonTextColor = UIColor.red
                 break
             }
             
-            if let a = self.preferredAction where a == action {
-                button.titleLabel?.font = UIFont.boldSystemFontOfSize(button.titleLabel!.font.pointSize)
+            if let a = self.preferredAction, a == action {
+                button.titleLabel?.font = UIFont.boldSystemFont(ofSize: button.titleLabel!.font.pointSize)
             }
             
-            button.setTitleColor(buttonTextColor, forState: .Normal)
-            button.setTitleColor(self.buttonHighlightedTextColor, forState: .Highlighted)
-            button.setBackgroundColor(self.buttonBackgroundColor, forState: .Normal)
-            button.setBackgroundColor(buttonTextColor, forState: .Highlighted)
+            button.setTitleColor(buttonTextColor, for: UIControlState())
+            button.setTitleColor(self.buttonHighlightedTextColor, for: .highlighted)
+            button.setBackgroundColor(self.buttonBackgroundColor, forState: UIControlState())
+            button.setBackgroundColor(buttonTextColor, forState: .highlighted)
         }
         
         var containerView:UIView? = nil
         let count = self.actions.count
         
-        for (i, action) in self.actions.enumerate() {
-            let button = TVAButton(type: .Custom)
+        for (i, action) in self.actions.enumerated() {
+            let button = TVAButton(type: .custom)
             self.buttons += [button]
             button.tag = i
             configureButton(button, action: action)
@@ -394,15 +394,15 @@ private extension TVAlertController {
         self.setupPairedConstraintsIfNeeded(containerView)
     }
     
-    private func setupPairedConstraintsIfNeeded(containerView:UIView?) {
-        if let c = containerView where self.buttons.count == 2 {
-            c.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[button0]-20-[button1]|", options:[.AlignAllCenterY, .AlignAllBottom, .AlignAllTop], metrics: nil, views: ["button0":self.buttons[0],"button1":self.buttons[1]]))
-            c.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[button0]|", options:[.AlignAllBottom, .AlignAllTop], metrics: nil, views: ["button0":self.buttons[0],"button1":self.buttons[1]]))
-            c.addConstraint(NSLayoutConstraint(item: self.buttons[0], attribute: .Width, relatedBy: .Equal, toItem: self.buttons[1], attribute: .Width, multiplier: 1, constant: 0))
+    func setupPairedConstraintsIfNeeded(_ containerView:UIView?) {
+        if let c = containerView, self.buttons.count == 2 {
+            c.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[button0]-20-[button1]|", options:[.alignAllCenterY, .alignAllBottom, .alignAllTop], metrics: nil, views: ["button0":self.buttons[0],"button1":self.buttons[1]]))
+            c.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[button0]|", options:[.alignAllBottom, .alignAllTop], metrics: nil, views: ["button0":self.buttons[0],"button1":self.buttons[1]]))
+            c.addConstraint(NSLayoutConstraint(item: self.buttons[0], attribute: .width, relatedBy: .equal, toItem: self.buttons[1], attribute: .width, multiplier: 1, constant: 0))
         }
     }
     
-    private func setupConstraints(inout views:[UIView]) {
+    func setupConstraints(_ views:inout [UIView]) {
         
         if views.count < 1 {
             return
@@ -414,14 +414,14 @@ private extension TVAlertController {
         var index = 0
         var prev:UIView?
         
-        for (i,v) in views.enumerate() {
+        for (i,v) in views.enumerated() {
             
             let name = "view\(i)"
             dict[name] = v
             
             v.translatesAutoresizingMaskIntoConstraints = false
-            v.setContentHuggingPriority(UILayoutPriorityRequired, forAxis: .Vertical)
-            v.setContentCompressionResistancePriority(UILayoutPriorityRequired, forAxis: .Vertical)
+            v.setContentHuggingPriority(UILayoutPriorityRequired, for: .vertical)
+            v.setContentCompressionResistancePriority(UILayoutPriorityRequired, for: .vertical)
             self.contentView?.addSubview(v)
             
             var spacing:CGFloat = 10
@@ -435,7 +435,7 @@ private extension TVAlertController {
                 
                 let maxWidth = self.view.bounds.width - (self.horizontalInset * 2)
                 let maxHeight : CGFloat = 10000
-                height = label.attributedText?.boundingRectWithSize(CGSizeMake(maxWidth, maxHeight), options: .UsesLineFragmentOrigin, context: nil).size.height ?? 30
+                height = label.attributedText?.boundingRect(with: CGSize(width: maxWidth, height: maxHeight), options: .usesLineFragmentOrigin, context: nil).size.height ?? 30
             }
             
             if prev != nil {
@@ -456,9 +456,9 @@ private extension TVAlertController {
         }
         
         // Vertical Constraints
-        self.contentView?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(verticalString, options:[.AlignAllLeft, .AlignAllRight], metrics: nil, views: dict))
+        self.contentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: verticalString, options:[.alignAllLeft, .alignAllRight], metrics: nil, views: dict))
         
-        self.contentView?.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[view0]|", options:[], metrics: nil, views: dict))
+        self.contentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view0]|", options:[], metrics: nil, views: dict))
     }
     
 }
@@ -466,17 +466,17 @@ private extension TVAlertController {
 // MARK: - TVAlertActionDelegate
 extension TVAlertController: TVAlertActionDelegate {
     
-    private func didChangeEnabled(action:TVAlertAction, enabled: Bool) {
+    fileprivate func didChangeEnabled(_ action:TVAlertAction, enabled: Bool) {
         
-        let index = (self.actions as NSArray).indexOfObject(action)
-        self.buttons[index].enabled = enabled
+        let index = (self.actions as NSArray).index(of: action)
+        self.buttons[index].isEnabled = enabled
         
     }
 }
 
 // MARK: - Blur view
 private extension TVAlertController {
-    private func setupBlurView() {
+    func setupBlurView() {
         
         let blurEffect = UIBlurEffect(style: self.style)
         let blurredEffectView = UIVisualEffectView(effect: blurEffect)
@@ -492,43 +492,43 @@ private extension TVAlertController {
 // MARK:- Keyboard moving
 private extension TVAlertController {
     
-    private func setupObservers() {
+    func setupObservers() {
         
         if self.manageKeyboard {
             return
         }
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(TVAlertController.keyboardWillAppear(_:)), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(TVAlertController.keyboardWillDisappear(_:)), name: UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(TVAlertController.keyboardWillAppear(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(TVAlertController.keyboardWillDisappear(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
     }
     
-    private func removeObservers() {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+    func removeObservers() {
+        NotificationCenter.default.removeObserver(self)
     }
     
-    @objc private func keyboardWillAppear(notification: NSNotification){
+    @objc func keyboardWillAppear(_ notification: Notification){
         self.animateContentViewYCenterTo(-30)
     }
     
-    @objc private func keyboardWillDisappear(notification: NSNotification){
+    @objc func keyboardWillDisappear(_ notification: Notification){
         self.animateContentViewYCenterTo(0)
     }
     
-    private func animateContentViewYCenterTo(y:CGFloat) {
+    func animateContentViewYCenterTo(_ y:CGFloat) {
         
         guard let contentView = self.contentView else {
             return
         }
         
         for c in self.view.constraints {
-            if c.firstItem as! NSObject == contentView && c.firstAttribute == NSLayoutAttribute.CenterY {
+            if c.firstItem as! NSObject == contentView && c.firstAttribute == NSLayoutAttribute.centerY {
                 c.constant = y
             }
         }
         
-        UIView.animateWithDuration(0.33) {
+        UIView.animate(withDuration: 0.33, animations: {
             self.view.layoutIfNeeded()
-        }
+        }) 
     }
 }
 
@@ -536,9 +536,9 @@ private extension TVAlertController {
 
 // MARK: First responder
 private extension UIView {
-    private func findFirstResponder() -> UIView? {
+    func findFirstResponder() -> UIView? {
         for subView in self.subviews {
-            if subView.isFirstResponder() {
+            if subView.isFirstResponder {
                 return subView
             }
             
@@ -554,44 +554,44 @@ private extension UIView {
 // MARK: AutoLayout helpers
 private extension UIView {
     
-    private func centerInSuperview() {
+    func centerInSuperview() {
         self.centerHorizontallyInSuperview()
         self.centerVerticallyInSuperview()
     }
     
-    private func centerHorizontallyInSuperview() {
+    func centerHorizontallyInSuperview() {
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.superview?.addConstraint(NSLayoutConstraint(item: self, attribute: .CenterX, relatedBy: .Equal, toItem: self.superview, attribute: .CenterX, multiplier: 1, constant: 0))
+        self.superview?.addConstraint(NSLayoutConstraint(item: self, attribute: .centerX, relatedBy: .equal, toItem: self.superview, attribute: .centerX, multiplier: 1, constant: 0))
     }
     
-    private func centerVerticallyInSuperview() {
+    func centerVerticallyInSuperview() {
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.superview?.addConstraint(NSLayoutConstraint(item: self, attribute: .CenterY, relatedBy: .Equal, toItem: self.superview, attribute: .CenterY, multiplier: 1, constant: 0))
+        self.superview?.addConstraint(NSLayoutConstraint(item: self, attribute: .centerY, relatedBy: .equal, toItem: self.superview, attribute: .centerY, multiplier: 1, constant: 0))
     }
     
-    private func constrainSizeTo(size:CGSize) {
+    func constrainSizeTo(_ size:CGSize) {
         self.constrainSizeToWidth(size.width)
         self.constrainSizeToHeight(size.height)
     }
     
-    private func constrainSizeToHeight(size:CGFloat) {
+    func constrainSizeToHeight(_ size:CGFloat) {
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.addConstraint(NSLayoutConstraint(item: self, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: size))
+        self.addConstraint(NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: size))
     }
     
-    private func constrainSizeToWidth(size:CGFloat) {
+    func constrainSizeToWidth(_ size:CGFloat) {
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.addConstraint(NSLayoutConstraint(item: self, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: size))
+        self.addConstraint(NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: size))
     }
     
-    private func constrainToSuperviewEdges() {
+    func constrainToSuperviewEdges() {
 
         if let superview = self.superview {
             self.translatesAutoresizingMaskIntoConstraints = false
-            let edges:[NSLayoutAttribute] = [.Top, .Bottom, .Left, .Right]
+            let edges:[NSLayoutAttribute] = [.top, .bottom, .left, .right]
 
             for edge in edges {
-                superview.addConstraint(NSLayoutConstraint(item: superview, attribute: edge, relatedBy: .Equal, toItem: self, attribute: edge, multiplier: 1, constant: 0))
+                superview.addConstraint(NSLayoutConstraint(item: superview, attribute: edge, relatedBy: .equal, toItem: self, attribute: edge, multiplier: 1, constant: 0))
             }
         }
     }
@@ -600,12 +600,12 @@ private extension UIView {
 
 // MARK: Image with color -- for button background
 private extension UIImage {
-    private static func imageWithColor(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) -> UIImage {
-        let rect = CGRectMake(0, 0, size.width, size.height)
+    static func imageWithColor(_ color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) -> UIImage {
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         color.setFill()
         UIRectFill(rect)
-        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return image
     }
@@ -615,26 +615,26 @@ private extension UIImage {
 private class TVAButton:UIButton {
     
     var shadows:Bool = true
-    private var backgroundColorStates:[String:UIColor] = [:]
-    override var enabled: Bool {
+    fileprivate var backgroundColorStates:[String:UIColor] = [:]
+    override var isEnabled: Bool {
         didSet {
-            self.alpha = enabled ? 1 : 0.3
+            self.alpha = isEnabled ? 1 : 0.3
         }
     }
     
     override var backgroundColor: UIColor? {
         didSet {
-            self.backgroundColorStates["\(UIControlState.Normal)"] = self.backgroundColor ?? UIColor.clearColor()
+            self.backgroundColorStates["\(UIControlState())"] = self.backgroundColor ?? UIColor.clear
         }
     }
     
-    override var highlighted: Bool {
+    override var isHighlighted: Bool {
         didSet {
-            let state = self.highlighted ? UIControlState.Highlighted : UIControlState.Normal
+            let state = self.isHighlighted ? UIControlState.highlighted : UIControlState()
             if let c = self.backgroundColorStates["\(state)"] {
-                self.layer.backgroundColor = c.CGColor
+                self.layer.backgroundColor = c.cgColor
             }
-            self.layer.shadowColor = self.highlighted ? UIColor.blackColor().CGColor : UIColor.clearColor().CGColor
+            self.layer.shadowColor = self.isHighlighted ? UIColor.black.cgColor : UIColor.clear.cgColor
             self.layer.shadowRadius = 4;
             self.layer.shadowOpacity = 0.7;
             self.layer.shadowOffset = CGSize(width: 0, height: 2);
@@ -651,37 +651,37 @@ private class TVAButton:UIButton {
         self.commonInit()
     }
     
-    private func commonInit() {
+    fileprivate func commonInit() {
         
-        self.addTarget(self, action: #selector(TVAButton.grow), forControlEvents: .TouchDown)
-        self.addTarget(self, action: #selector(TVAButton.grow), forControlEvents: .TouchDragEnter)
-        self.addTarget(self, action: #selector(TVAButton.normal), forControlEvents: .TouchDragExit)
-        self.addTarget(self, action: #selector(TVAButton.normal), forControlEvents: .TouchUpInside)
+        self.addTarget(self, action: #selector(TVAButton.grow), for: .touchDown)
+        self.addTarget(self, action: #selector(TVAButton.grow), for: .touchDragEnter)
+        self.addTarget(self, action: #selector(TVAButton.normal), for: .touchDragExit)
+        self.addTarget(self, action: #selector(TVAButton.normal), for: .touchUpInside)
     }
     
-    @objc private func grow() {
+    @objc fileprivate func grow() {
         self.transformToSize(1.15)
     }
     
-    @objc private func normal() {
+    @objc fileprivate func normal() {
         self.transformToSize(1.0)
     }
     
-    @objc private func shrink() {
+    @objc fileprivate func shrink() {
         self.transformToSize(0.8)
     }
     
-    private func transformToSize(scale:CGFloat) {
+    fileprivate func transformToSize(_ scale:CGFloat) {
         UIView.beginAnimations("button", context: nil)
         UIView.setAnimationDuration(0.1)
-        self.transform = CGAffineTransformMakeScale(scale,scale);
+        self.transform = CGAffineTransform(scaleX: scale,y: scale);
         UIView.commitAnimations()
     }
     
-    func setBackgroundColor(color: UIColor, forState state: UIControlState) {
+    func setBackgroundColor(_ color: UIColor, forState state: UIControlState) {
         self.backgroundColorStates["\(state)"] = color
         
-        if state == .Normal {
+        if state == UIControlState() {
             self.backgroundColor = color
         }
     }
@@ -692,26 +692,26 @@ private class TVATextField: UITextField {
     let inset: CGFloat = 10
     
     // placeholder position
-    override func textRectForBounds(bounds: CGRect) -> CGRect {
-        return CGRectInset(bounds , inset , inset)
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.insetBy(dx: inset , dy: inset)
     }
     
     // text position
-    override func editingRectForBounds(bounds: CGRect) -> CGRect {
-        return CGRectInset(bounds , inset , inset)
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.insetBy(dx: inset , dy: inset)
     }
     
-    override func placeholderRectForBounds(bounds: CGRect) -> CGRect {
-        return CGRectInset(bounds, inset, inset)
+    override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.insetBy(dx: inset, dy: inset)
     }
 }
 
 // MARK:- TVLabel
 private class TVALabel: UILabel {
     
-    private override func layoutSubviews() {
+    fileprivate override func layoutSubviews() {
         super.layoutSubviews()
-        self.preferredMaxLayoutWidth = CGRectGetWidth(self.bounds)
+        self.preferredMaxLayoutWidth = self.bounds.width
         super.layoutSubviews()
     }
 }
