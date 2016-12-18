@@ -26,8 +26,8 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes/**/*.swift'
-  s.resource_bundles = {
-    'TVAlert' => ['Pod/Assets/*.png']
-  }
+#  s.resource_bundles = {
+#    'TVAlert' => ['Pod/Assets/*.png']
+#  }
 
 end
