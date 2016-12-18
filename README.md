@@ -7,7 +7,28 @@
 
 ## Usage
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+TVAlert's usage is the same as `UIAlertController`. Just replace `UI` with `TV` on both `UIAlertController` and `UIAlertAction` 
+
+```swift
+let alertController = TVAlertController(title: "Title", message: "Message", preferredStyle: .alert)
+
+alertController.style = style
+
+let OKAction = TVAlertAction(title: "OK", style: .default) { (action) in
+// ...
+}
+alertController.addAction(OKAction)
+
+let cancelAction = TVAlertAction(title: "Cancel", style: .cancel) { (action) in
+// ...
+}
+alertController.addAction(cancelAction)
+
+
+self.present(alertController, animated: true) {
+// ...
+}
+```
 
 ## Requirements
 
