@@ -584,6 +584,18 @@ private extension UIView {
         self.addConstraint(NSLayoutConstraint(item: self, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: size))
     }
     
+    private func constrainToSuperviewEdges() {
+
+        if let superview = self.superview {
+            self.translatesAutoresizingMaskIntoConstraints = false
+            let edges:[NSLayoutAttribute] = [.Top, .Bottom, .Left, .Right]
+
+            for edge in edges {
+                superview.addConstraint(NSLayoutConstraint(item: superview, attribute: edge, relatedBy: .Equal, toItem: self, attribute: edge, multiplier: 1, constant: 0))
+            }
+        }
+    }
+
 }
 
 // MARK: Image with color -- for button background
